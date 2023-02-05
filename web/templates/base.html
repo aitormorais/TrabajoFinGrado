@@ -35,7 +35,7 @@
           // Añadir evento de clic
           google.maps.event.addListener(marker, 'click', function() {
             infowindow = new google.maps.InfoWindow({
-              content: 'Nombre:"{{u.nombre}}",Particulas:'
+              content: 'Nombre:"{{u.nombre}}",Particulas:{{u.contaminacion}}'
             });
             infowindow.open(map, marker);
           });

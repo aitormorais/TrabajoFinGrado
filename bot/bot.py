@@ -51,7 +51,7 @@ async def process_image(update, context):
             "lng": longitud,
             "contaminacion":contamina,
         }
-        requests.post("http://127.0.0.1:8000/api/data/", json=placeholder_data)
+        requests.post("https://aitorm.pythonanywhere.com/api/data/", json=placeholder_data)
         await asyncio.sleep(1)
     except Exception as e:
         logging.error(f"Ha ocurrido un error: {e}")
