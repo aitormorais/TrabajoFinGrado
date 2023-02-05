@@ -1,0 +1,89 @@
+\chapter{Antecedentes y justificación}\label{Int}
+\fancyhf{}% Clear header/footer
+\fancyhead[L]{PROYECTO DE FIN DE GRADO}
+\fancyfoot[L]{\thepage} 
+%\section{Antecedentes y Justificación}
+
+\section{Antecedentes y estado del arte}
+
+La contaminación atmosférica es un problema generalizado que afecta tanto a la salud humana como al medio ambiente. Para adoptar medidas preventivas, es crucial detectar a tiempo la contaminación atmosférica. Sin embargo, la medición actual de la contaminación atmosférica se basa en estaciones de control caras y poco accesibles. El objetivo de mi proyecto es ofrecer una solución práctica y asequible al problema de la detección de la contaminación atmosférica utilizando imágenes captadas por el usuario. Algún ejemplo de esto serían
+los siguientes:
+\begin{itemize}
+    \item Análisis de laboratorio de muestras de aire: Este proceso es costoso y requiere tiempo y esfuerzo para recopilar y enviar muestras a un laboratorio.
+    \item Sistemas de monitoreo de redes:  Estos sistemas requieren la instalación de sensores en varios puntos de la ciudad y suelen ser costosos y difíciles de acceder para la mayoría de la población.
+    \item Tecnologías de satélite: Este enfoque es costoso debido a la necesidad de desarrollar y lanzar satélites especializados.
+\end{itemize}
+A nivel estatal, los niveles de PM10 siempre han sido altos, esto en parte es se debe a las incursiones de masa de aire africano proveniente del desierto del Sahara. En 2021 se empezó a modelar y estimar la cantidad de partículas provenientes de las masas de aire Africanas y se observó que 9 de cada 10 estaciones exceden sus niveles de VLD y VLD en las mediciones que se tomaron.
+Teniendo en cuenta estos aspectos, podemos deducir que respiramos aire de dudosa calida, ademas, el numero de estaciones fijas por habitante a nivel estatal es escaso,atendiendo a la informacion que arrojan estas estaciones es importante destacar que existen zonas que superan frecuentemente el nivel maximo de exposicion diaria y anual a PM10 recomendado por la OMS\\
+Existen varios índices para medir la contaminación en el aire, pero para este proyecto nos centraremos en los índices basados en partículas en suspensión en el aire, más concretamente las denominadas como PM10  y PM2.5 por sus siglas (Partículas menores xx a micrómetros).
+Empezaré exponiendo por que es importante tener en cuenta estas partículas para la detección del estado de calidad del aire:
+Estas partículas tienen un tamaño significativamente pequeño, su diámetro varia entre 2,5 y 10 micrómetros, para que el lector de este documento pueda imaginar claramente su tamaño aclararemos que 1 micrómetro corresponde a una milésima parte de un milímetro.
+Las PM10 son capaces de penetrar has las vías respiratorias bajas.
+Seguido, nombraré algunas enfermedades que pueden ser generadas por cuando respiramos aire, que contiene niveles perjudiciales para la salud de PM10 y PM2.5:\\
+
+\begin{itemize}
+    \item Tos o dificultad para respirar
+    \item infartos de miocardio
+    \item Asma
+    \item Cáncer de pulmón
+\end{itemize}
+En cuanto a las PM2.5 estas partículas son capaces de penetrar hasta las zonas de intercambio de gases del pulmón.El origen de estas partículas proviene  mayoritariamente de las emisiones de vehículos.
+Estas partículas no solo son las culpables de efectos adversos en la salud humana tambien tienen efectos adversos sobre el medio ambiente ya que estas partículas son movidas por el viento y son capaces de instalarse en el suelo o en el agua causando daños medio ambientales como los siguientes:\\
+\begin{itemize}
+    \item Acidificación de los lagos y arroyos
+    \item Reducción de los nutrientes del suelo
+    \item Efectos perjudiciales sobre la diversidad de ecosistemas
+    \item Contribución a los efectos de lluvia ácida
+\end{itemize}
+
+
+
+
+Actualmente, existen soluciones costosas y poco accesibles para detectar la contaminación del aire. Sin embargo, la tecnología de procesamiento de imágenes ha avanzado significativamente en los últimos años y es posible desarrollar una solución económica y accesible para detectar la contaminación del aire a través de imágenes capturadas por los usuarios. Este proyecto se diferencia de las tecnologías nombradas anteriormente, ya que proporciona una solución accesible y asequible que utiliza tecnologías existentes, como puede ser el uso de :
+\begin{itemize}
+    \item  Bot de Telegram.
+    \item Cámaras móviles.
+    \item API de Google maps.
+\end{itemize}
+
+Además, al permitir a los usuarios contribuir con datos sobre la calidad del aire, este proyecto también aborda la necesidad de una mayor participación ciudadana en la monitorización de la calidad del aire.
+Esto fomenta la denominada ciencia ciudadana,El libro blanco para la ciencia ciudadana para Europa define la ciencia ciudadana con el siguiente termino:\\
+"La participación de la ciudadanía en actividades de investigación científica en la que los ciudadanos contribuyen activamente a la ciencia con su esfuerzo intelectual, sus conocimientos o con sus herramientas y recursos."\\
+En la misma línea, en abril de 2020, la Asociación Europea de Ciencia Ciudadana publicó las principales características de su enfoque de CC (Haklay, 2020). Este gran ejercicio está estrechamente relacionado con los diez principios de la Ciencia Ciudadana también definidos por la misma asociación que se listan a continuación.
+\begin{enumerate}
+    \item Los proyectos de ciencia ciudadana involucran activamente a los y las ciudadanas en tareas
+científicas que generan nuevo conocimiento o una mejor comprensión.
+    \item Los proyectos de ciencia ciudadana producen un resultado científico nuevo
+    \item Tanto los y las científicas profesionales como los y las científicas ciudadanas se benefician de
+la participación
+    \item Los y las científicas ciudadanas pueden, si lo desean, participar en múltiples etapas del proceso
+ científico 
+    \item Los y las científicas ciudadanas deben recibir información del proyecto en todo momento
+    \item La ciencia ciudadana representa un tipo de investigación como cualquier otro, con sus
+limitaciones y sesgos que hay que considerar y controlar
+    \item Los datos y meta-datos de proyectos de ciencia ciudadana deberían ser públicos y a ser posible,
+los resultados deberían publicarse en un formato de acceso abierto
+    \item Los y las científicas ciudadanas deben estar reconocidos en los resultados y publicaciones del
+proyecto
+    \item Los programas de ciencia ciudadana deben evaluarse por su producción científica, la calidad de
+los datos, la experiencia de los y las participantes y el alcance del impacto social o político
+    \item Los líderes de proyectos de ciencia ciudadana deben tener en cuenta tanto los aspectos legales
+y éticos como los derechos de autor, la propiedad intelectual, los acuerdos de intercambio de
+datos, la confidencialidad, la atribución y el impacto ambiental de sus actividades
+    
+\end{enumerate}
+La ciencia ciudadana está cobrando un papel cada vez más importante en la investigación. Cabe resaltar que en la Estrategia Española de Ciencia, Tecnología e Innovación 2021-2027 (EECTI) (España, 2020, p. 34), la CC aparece explícitamente como herramienta para fomentar uno de los principios de la EECTI: La responsabilidad social y económica en la I+D+I y la aplicación de la co-creación y las políticas de acceso abierto, así como, el alineamiento de la I+D+I con los valores, necesidades y expectativas sociales. La educación reglada a nivel estatal no es mera espectadora del avance científico y es por ello por lo que el anteproyecto de Ley Orgánica del Sistema Universitario e habla del rol de la CC para el fomento de la ciencia abierta. De forma específica, en el artículo 15: Cohesión social y territorial se indica: <<Las universidades promoverán un desarrollo económico y social equitativo, inclusivo y sostenible, [..] A tal efecto, reforzarán la colaboración con las Administraciones Locales y con los actores sociales de su entorno mediante los proyectos de Ciencia Ciudadana [..]>>. Además, se refiere completamente al fomento de la Ciencia Ciudadana y la Ciencia Abierta que inspira esta práctica:
+
+\textbf{Se fomentará la Ciencia Ciudadana como un campo de generación de conocimiento compartido entre la ciudadanía y el sistema universitario de investigación. Por último, la norma busca ahondar y asegurar una Universidad autónoma, democrática y participativa que constituya un espacio de libertad, de debate cultural y de desarrollo personal al mismo tiempo que sea eficaz y eficiente en la toma de decisiones y su gestión el artículo (Artículo 63, apartado 10).}
+
+A nivel de participación, según la literatura consultada, existen varias tipologías de proyecto de ciencia ciudadana dependiendo del grado en el que se incorpore o involucre la ciudadanía en el proceso científico. La "inteligencia distribuida" (Howe, 2006), "Ciencia participativa" (Bonney et al., 2009) y "Ciencia Ciudadana Extrema" (ECS, por sus siglas en inglés) (Haklay, 2013). Esta última categoría busca específicamente poner las herramientas y métodos científicos al alcance de cualquiera. Es decir, la ECS propone que todas las personas, independientemente de su nivel de alfabetización o conocimientos previos, puedan involucrarse de todo el proceso científico, desde la definición de los problemas de su entorno o que les atañen y la colaboración en la recogida de datos, hasta el uso de los resultados para abordar y resolver los problemas identificados por las propias comunidades. En la misma línea, los proyectos de investigación colectivos se clasifican en una escalera de participación, en cada peldaño que se sube la colaboración es mayor en todos los ámbitos de la ciencia (Arnstein, 1969). De esta forma, y análogamente a la taxonomía previa, existen proyectos contributivos (principalmente la ciudadanía colabora recogiendo y recopilación datos para que otras personas o entidades los usen); proyectos colaborativos (donde la ciudadanía participa de la recopilación de datos y perfeccionamiento del diseño del proyecto, en el análisis de datos y en la difusión de resultados); y finalmente en proyectos cocreados o co-creativos (que son diseñados conjuntamente por científicos y ciudadanía en los que el público de a pie comparte la responsabilidad de la mayoría o de todos los pasos de un proyecto/proceso científico). Por último, se ha encontrado un trabajo de investigación (Aristeidou et al., 2017) que se centra en el nivel de participación de la ciudadanía teniendo en cuenta los rasgos de comportamiento y las necesidades personales encontrando cinco tipos de usuarios en la ciencia ciudadana: trabajadores, persistentes, leales, los que están al acecho y visitantes.
+
+
+\section{Justificación}
+La justificación técnica de este proyecto se basa en la necesidad de una solución asequible y práctica para la detección de la contaminación atmosférica. Actualmente, la mayoría de la población considera que muchas de las soluciones existentes son caras y de difícil acceso, lo que limita su capacidad para controlar y comprender la calidad del aire en sus comunidades.
+
+Además, la contaminación del aire es un problema global que afecta la salud humana y el medio ambiente, por lo que es importante que se desarrollen soluciones accesibles y asequibles para monitorear y comprender su impacto. Al permitir a los usuarios contribuir con datos sobre la calidad del aire, nuestro proyecto también promueve la participación ciudadana en la monitorización de la calidad del aire.
+
+Desde el punto de vista técnico, este proyecto es viable gracias a la disponibilidad de tecnologías como las cámaras de los teléfonos móviles y las API de Google Maps, que permiten recopilar y procesar información sobre la calidad del aire de forma fácil y asequible. Además, el uso de un bot de Telegram y un sitio web construido en Django permite integrar y visualizar los resultados de forma sencilla, lo que facilita a los usuarios la comprensión y el uso de los datos.
+
+En conclusión, la justificación técnica de este proyecto se basa en la necesidad de una solución asequible y práctica para la detección de la contaminación atmosférica, así como involucrar a la ciudadanía en campañas de captación colectiva de datos de calidad del aire basadas en ciencia ciudadana y en la disponibilidad de tecnologías existentes que permiten su desarrollo y aplicación.

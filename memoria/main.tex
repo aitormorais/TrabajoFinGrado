@@ -1,0 +1,203 @@
+\documentclass[a4paper,openany,12pt]{book}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% DEFINICIÓN DE PAQUETES %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tocloft}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+\usepackage[spanish]{babel}
+\usepackage{fancyhdr}
+\usepackage{ragged2e}
+\usepackage{setspace}
+\usepackage{cite}
+\usepackage{enumerate}
+\usepackage[font={color=RBlue},figurename=Fig.]{caption}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{hyperref}
+\usepackage{eurosym}
+\usepackage{pdfpages}
+\usepackage{multirow, array}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{xcolor,colortbl} 
+%Paquete para crear colores específicos según RGB.
+\usepackage{geometry}
+%Paquete para definir las dimensiones de los márgenes.
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+\usepackage[titletoc]{appendix}
+\usepackage{notoccite}
+\usepackage{acronym}
+\usepackage[colorinlistoftodos]{todonotes}
+% added packages
+\usepackage{listings}
+\usepackage{enumitem}% http://ctan.org/pkg/enumitem
+
+
+
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+\setlength{\columnsep}{1cm}
+\DeclareUnicodeCharacter{2061}{}
+
+\definecolor{RBlue}{RGB}{23,33,110} 
+\definecolor{Rojo}{RGB}{255,0,0}
+\definecolor{Cyan}{RGB}{214,234,240}
+\definecolor{Naranja}{RGB}{255,222,199}
+\definecolor{GrisTabla}{RGB}{245,245,245}
+%Ejemplo de funciones para definir colores a utilizar el documento, según sus dígitos RGB.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% PROPIEDADES DEL DOCUMENTO (Funciones específicas) %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\setcounter{secnumdepth}{3} 
+%Esta función permite que en el índice se indique hasta el sub-nivel número tres. Es decir que aparezcan hasta los apartados 1.1.1. Si se indicase {4}, se podrían observar hasta los sub-apartados 1.1.1.1. 
+
+%\setlength{\headsep}{0.5in} 
+
+
+\onehalfspace 
+
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0cm}
+
+\includeonly{
+    Chapter/intro,
+    Chapter/01_antecedentes,
+    Chapter/02_objalc,
+    Chapter/03_desarrollo,
+    Chapter/04_planificacion,
+    Chapter/05_cargas,
+    Chapter/06_presupuesto,
+    Chapter/07_conclusiones,
+    Chapter/08_valoracion,
+    Chapter/10_biblio,
+    Chapter/00_requisitos,
+    Chapter/000_repo,
+    Chapter/09_anexo,
+}
+%Esta función es de gran importancia. Como se puede observar a la izquierda, hay una carpeta que se ha creado con diferentes capítulos. Estos capítulos son los diferentes apartados de la memoria en los que se va a ir escribiendo. Por ejemplo, el capítulo de la introducción, el capítulo de objetivos, el capítulo de la memoria técnica, o el capítulo del plan de trabajo. Bien, de cara a poder incluirlos a posteriori en esto documento principal (MAIN.tex) es necesario indicarle a LATEX que los cargue y eso se realiza con esta función. Así, habrá que incluir tantos parámetros como capítulos se deseen cargar. Los parámetros son simplemente la dirección de la carpeta en la que se encuentran, y su nombre.
+
+\geometry{top=3.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+%Esta función determina los márgenes que se han de utilizar a lo largo de todo el documento. Así, el margen superior será de 3.5 y el resto de 2.5 cm .
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% COMIENZA EL DOCUMENTO (con la función \begin{document} %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%% PAGINACIÓN %%%%
+%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy}
+%Esta función es utilizada para crear un nuevo estilo de formato, es el formato "fancy". En él vamos a determinar a continuación cómo se quieren posicionar pies de página, encabezados y demás.
+
+\lhead{}
+%Esta función sirve para que no se escriba nada (parámetro obligatorio vacío) en el encabezado en la posición izquierda. 
+
+\chead{}
+
+\rhead{}
+
+\cfoot{}
+
+\fancyfoot[L]{\thepage} 
+
+\renewcommand{\headrulewidth}{0pt} 
+
+\includepdf[]{PDF/Por0}
+\newpage
+\includepdf[]{PDF/Por1}
+\newpage
+\frontmatter
+
+\setcounter{page}{3}
+
+%Esta función permite comenzar el contador de las páginas para la numeración en el número 3, es importante puesto que los primeros números van dedicados a portada y contraportada y no se numeran. Así, la primera página numerada será la 3. 
+\section*{Resumen}
+\thispagestyle{fancy}
+\fancyhead[L]{PROYECTO DE FIN DE GRADO}
+Este proyecto de fin de grado trata del diseño y desarrollo de una aplicación no nativa con la que podremos medir la cantidad de partículas en suspensión (PM2.5, o PM10)que se encuentran en el aire. 
+Para este fin, la aplicación hace uso de procesamiento de imágenes.
+En primer lugar, contamos con una página web que es la encargada de mostrar los datos de la contaminación que hemos obtenido mediante la carga y procesamiento de imágenes.
+En segundo lugar, disponemos de un Bot que puede recibir imágenes, que el usuario habrá tomado, estas imágenes se analizaran y se devuelven los resultados de la contaminación detectada en la fotografía.
+De la fotografía nos interesa su ubicación para poder geo posicionarla. Una vez que el análisis de la imagen  haya sido efectuado obtendremos los datos de la contaminación en el aire. Estos datos serán almacenados en una base de datos y posteriormente cargamos estos datos en nuestra página web. 
+Una vez la carga haya sido efectuada con éxito, podremos visualizar los datos con facilidad en una web cuyo objetivo será permitirnos ver de forma amigable la contaminación detectada en el aire en ciertas zonas.
+\section*{Descriptores}
+PM2.5,PM10,Bot, Web,Telegram
+\clearpage
+\fancypagestyle{plain}{}
+%Se define mediante esta función el formato plain, que no tiene nada, ni encabezados ni pies de página. Realmente esta función podría ir a comienzo del documento o en cualquier lugar, es decir, se puede mover.
+
+\tableofcontents
+%Esta función permite introducir el índice de capítulos (hasta el subíndice que se haya indicado previamente).
+\newpage
+\listoftables
+%Por ultimo, se introduce el índice de tablas en caso de que las hubiera en vuestro documento. 
+\mainmatter
+%Esta función se utiliza para indicar que a partir de ahora la numeración pasa a ser con números estándar y no con romanos como se había venido utilizando hasta ahora.
+
+\pagestyle{fancy}
+%A continuación se vuelve a redefinir el estilo “fancy” para que se adecúe al que ha de utilizarse a lo largo de toda la memoria. El estilo es el siguiente:
+
+\lhead{}
+
+
+\chead{}
+
+
+\fancyhead[OL]{PROYECTO FIN DE GRADO}
+%En el encabezado a la derecha en las páginas pares se escribe: "PROYECTO FIN DE GRADO".
+
+\fancyhead[OL]{PROYECTO DE FIN DE GRADO} 
+
+
+\fancyhead[L]{}
+
+
+\cfoot{} 
+
+
+\fancyfoot[L]{\thepage} 
+
+
+\renewcommand{\headrulewidth}{0pt} 
+\bibliographystyle{IEEEtran}
+\include{Chapter/intro.tex}
+\include{Chapter/01_antecedentes.tex}
+\include{Chapter/02_objalc.tex}
+\include{Chapter/00_requisitos.tex}
+\include{Chapter/03_desarrollo.tex}
+\include{Chapter/04_planificacion}
+\include{Chapter/05_cargas.tex}
+\include{Chapter/06_presupuesto.tex}
+\include{Chapter/07_conclusiones.tex}
+\include{Chapter/08_valoracion.tex}
+\include{Chapter/000_repo.tex}
+\include{Chapter/10_biblio.tex}
+
+
+\newpage
+\thispagestyle{empty}
+
+\thispagestyle{fancy}
+
+\newpage
+\thispagestyle{empty}
+\fancypagestyle{plain}{}
+\begin{appendices}
+    \include{Chapter/09_anexo.tex}
+\end{appendices}
+
+\end{document}

@@ -1,0 +1,140 @@
+\chapter{Desarrollo}\label{int}
+\thispagestyle{fancy}
+
+\section{Fase Inicial}
+Una vez definido el objetivo del proyecto pasaremos a diferencias las partes más relevantes que se desean implementar.
+\begin{itemize}
+    \item Bot de Telegram
+    \item Algoritmo para procesar imágenes
+    \item Página web
+\end{itemize}
+Tras enumerar todos los componentes del sistema, es necesario definir su estructura de diseño. El término "arquitectura de software" se refiere al proceso de definir los numerosos componentes que conforman un sistema y cómo se comunican entre sí utilizando un conjunto de directrices y abstracciones. En este caso, se ha optado por una arquitectura de microservicios, que se describe a continuación.
+\section{Arquitectura}
+
+La arquitectura de la aplicación está diseñada para gestionar el procesamiento y análisis de imágenes de partículas y su localización. Consta de tres componentes clave: el bot de Telegram, el módulo de procesamiento de imágenes y la interfaz web.
+
+El bot de Telegram, codificado en Python, permite a los usuarios cargar una imagen de partículas y su ubicación. La imagen es examinada por el módulo de procesamiento de imágenes, que también determina dónde se encuentran las partículas. Este módulo se construye con Python y varias bibliotecas de procesamiento de imágenes, como OpenCV.
+
+La interfaz web se encarga de mostrar los resultados del procesamiento de imágenes y la localización de partículas. 
+
+Toda la arquitectura está diseñada para ser modular y fácilmente ampliable, de modo que en el futuro puedan añadirse nuevos algoritmos o funciones de procesamiento de imágenes. Además, el sistema está diseñado para ser escalable.
+
+Para nuestro caso en particular se identifican los siguientes servicios:
+\begin{itemize}
+    \item \textbf{Bot de Telegram}:
+    Se encargará de la interacción a través de Telegram con el usuario, para esto el usuario mandará unos datos al bot y una vez recolectados y procesados estos datos serán mandados a la web.
+    \item\textbf{ Procesamiento de imagen:}
+    Una vez el usuario ha subido la foto, se procesará la imagen usando ciertos filtros y conversión de la imagen a escala de grises para obtener el resultado.
+    \item \textbf{Página web:}
+    La utilizaremos para mostrar los resultados obtenidos, así como la ubicación donde se tomó la foto.
+\end{itemize}
+%\section{Diagrama de flujo}
+\section{Bot de Telegram}
+Se comenzó el desarrollo por la parte de la creación del bot de Telegram, ya que será el elemento con el cual el usuario entrara en contacto por primera vez y el que dará a pie a poder usar todo el sistema de la manera correcta. Además, al ser algo nuevo que podría requerir más tiempo, se vio acertado empezar por este apartado, ya que la creación de los otros elementos se tenía experiencia previa gracias a la formación académica recibida a lo largo de la carrera.
+
+El proceso de desarrollo incluye la lectura de tutoriales y documentación oficial de Telegram sobre cómo crear bots en Telegram.
+El primer paso es crear un bot en Telegram, para lo que es necesario instalar la aplicación de mensajería, ya que es así como se lleva a cabo el proceso. Telegram cuenta con un bot oficial que los desarrolladores pueden utilizar para crear bots y actualizar sus datos.
+
+El contacto con el bot oficial de Telegram @BotFather se establece a través de una ventana de chat privada. El bot proporciona una lista de comandos que se pueden utilizar para crear y gestionar bots.
+En esa lista de comandos se encuentra el comando /newbot, que permite crear un nuevo bot. Este es el primer comando que se utiliza. A continuación, el bot oficial solicita un nombre de usuario para crear el nuevo bot, que debe ser distinto de cualquier otro bot ya existente.
+
+Una vez creado el bot, BotFather de Telegram proporciona el ID público del bot, que cualquier usuario puede utilizar para iniciar una conversación. Además, proporciona el token necesario para utilizar la API de bots de Telegram. De esta forma, se tiene acceso a todos los métodos de Telegram disponibles para conocer el funcionamiento del nuevo bot, incluyendo la capacidad de leer y enviar mensajes cuando un usuario contacta con él y un amplio abanico de otras capacidades.
+
+Es crucial tener en cuenta que el token proporciona acceso completo al bot desarrollado; como resultado, por razones de seguridad, se debe tener cuidado de no revelar el token a terceros. En caso de filtración, se puede revocar el token actual utilizando el comando /revoke antes de generar uno nuevo.
+
+\section{Instanciación y definición del bot}
+
+
+Para instanciar el bot se utiliza el módulo Telegram y su extensión ApplicationBuilder. En primer lugar, se crea una instancia de ApplicationBuilder, a la que se le pasa el token del bot obtenido al crear el bot en Telegram.
+El bot tiene como función procesar imágenes recibidas por el usuario y enviar los datos de la imagen procesada a una API. 
+\subsection{Interacción con el usuario}
+Cuando el usuario envía una imagen al bot, se utiliza la función suavizar para suavizar la imagen y contar los puntos detectados en ella. Luego, se envían los datos de la imagen procesada, como la contaminación detectada y la ubicación de la imagen, a una API mediante una solicitud HTTP POST. El bot también tiene la capacidad de recibir la latitud y longitud del usuario y guardar esta información para enviarla junto con los datos de la imagen procesada a la API. Utiliza también la librería "logging" para registrar eventos y errores en un archivo de registro.
+\section{Procesar la imagen}
+La función usa la biblioteca OpenCV para realizar las operaciones de procesamiento de imágenes, la función se llama tratar y recibe como argumentos una cadena de texto
+\begin{enumerate}
+    \item Carga una imagen utilizando la ruta especificada en el argumento 
+    \item Verifica si la imagen se ha cargado correctamente y si no es así, lanza un error
+    \item Aplica un filtro de diferencia de mediana a la imagen original
+    \item Convierte la imagen suavizada a escala de grises
+    \item Calcula la diferencia entre la imagen original y la imagen suavizada con el filtro de mediana
+    \item Vuelve a convertir la imagen de diferencia a escala de grises
+    \item Aplica el algoritmo Canny para detectar los bordes en la imagen en escala de grises
+    \item Encuentra los contornos en la imagen usando Canny
+    \item Verifica si se encontraron al menos un contorno y si no es así, lanza un error
+    \item Dibuja los contornos encontrados en la imagen original y los marca en rojo
+    \item Guarda la imagen con los contornos marcados en rojo
+    \item Imprime el número de contornos encontrados 
+    \item Calcula y devuelve el resultado, que es la cantidad de contornos dividido por 36
+\end{enumerate}
+\clearpage
+\lstset{language=Python, breaklines=true, basicstyle=\footnotesize}
+\begin{lstlisting}[frame=single]
+def tratar(nombre_imagen): 
+    # Cargar imagen y verificar que la ruta de la imagen es válida 
+    img = cv2.imread(nombre_imagen) 
+    # Verificar que la imagen se ha cargado correctamente 
+    if img is None:
+        raise ValueError("Nooooo se pudo cargar la imagen: ", nombre_imagen)
+    # Aplicar filtro de diferencia de mediana 
+    img_suave = cv2.medianBlur(img, 5) 
+    # Convertir a escala de grises 
+    img_gris = cv2.cvtColor(img_suave, cv2.COLOR_BGR2GRAY) 
+    # Aplicar la diferencia entre la imagen original y la imagen suavizada con el filtro de mediana 
+    img_diferencia = cv2.absdiff(img, img_suave) 
+    img_gris = cv2.cvtColor(img_diferencia, cv2.COLOR_BGR2GRAY) 
+    # Aplicar Canny para detectar los bordes
+    img_canny = cv2.Canny(img_gris, 50, 150) 
+    # Encontrar contornos 
+    contornos, _ = cv2.findContours(img_canny, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE) 
+    # Verificar que se encontraron al menos un contorno 
+    if len(contornos) == 0:
+        raise ValueError("No se encontraron puntos en la imagen.") 
+    # Dibujar los contornos encontrados en la imagen original en rojo 
+    img_puntos = img.copy() 
+    cv2.drawContours(img_puntos, contornos, -1, (0, 0, 255), 2) 
+    # Guardar la imagen con los puntos detectados marcados en rojo 
+    cv2.imwrite("imgpuntos.jpg", img_puntos) 
+    # Imprimir el número de puntos encontrados 
+    print("Número de puntos encontrados: ", len(contornos)) 
+    result = len(contornos)/36 
+    return result
+
+\end{lstlisting}
+\clearpage
+\section{Interfaz web}
+La interfaz web cumple con el objetivo de mostrar la información. Esta interfaz está construida con Django y tiene un front-end que utiliza JavaScript y HTML. La interfaz web también se comunica con una base de datos para almacenar las imágenes procesadas y la ubicación de los componentes. En este caso, se está utilizando SQLite como motor de base de datos y el archivo "db.sqlite3" en el directorio principal como archivo de la base de datos.
+\section{Almacenamiento de datos}
+Se utiliza la base de datos sqlite cabe destacar el uso de esta base de datos por sus siguientes beneficios:
+\begin{enumerate}
+    \item Fácil de configurar: SQLite es una base de datos file-based, lo que significa que no requiere ninguna configuración adicional para trabajar con Django.
+    \item Pequeño tamaño: SQLite tiene un tamaño de archivo pequeño, lo que lo hace ideal para aplicaciones web pequeñas
+    \item Portabilidad: SQLite es una base de datos portable, lo que significa que puede ser usada en diferentes sistemas operativos sin necesidad de configuraciones adicionales.
+    \item Protección contra corrupción de datos: SQLite tiene mecanismos de protección contra corrupción de datos, lo que garantiza la integridad de los datos en caso de fallas del sistema.
+    \item Sin procesos de servidor: SQLite no requiere procesos de servidor para funcionar, lo que reduce la sobrecarga en el sistema y aumenta la escalabilidad.
+\end{enumerate}
+
+La clase "Ubicación" define un modelo con cuatro campos: nombre, lat, lng y contaminación, y un campo de fecha. Cada vez que se crea una nueva instancia de la clase Ubicación, se creará una nueva fila en la tabla correspondiente en la base de datos con los valores especificados para cada campo. El campo "fecha" se actualizará automáticamente con la fecha en la que se creó la instancia. 
+\clearpage
+\begin{lstlisting}[frame=single]
+class Ubicacion(models.Model):
+    nombre = models.CharField(max_length=20)
+    lat = models.CharField(max_length=200)
+    lng = models.CharField(max_length=200)
+    contaminacion = models.CharField(max_length=200)
+    fecha = models.DateTimeField(auto_now_add=True)
+    def __unicode__(self):
+        return self.nombre
+\end{lstlisting}
+
+
+\section{API}
+En este proyecto se utilizan tanto la API de Google Maps como la de Telegram para desarrollar un sistema integral de detección de la contaminación atmosférica.
+
+El desarrollo de un bot que permite a los usuarios enviar su ubicación y la imagen capturada de la contaminación en una hoja blanca hace uso de la API de Telegram. El bot recibe los datos del usuario a través de la API y procesa la imagen para contabilizar los puntos de contaminación que ha encontrado. A continuación, mediante una petición HTTP POST, la API permite enviar los datos procesados a la web Django.
+
+Luego, el sitio web de Django utiliza la API de Google Maps  para mostrar un mapa con marcadores que muestran la ubicación exacta donde el usuario cargó la foto y  la cantidad de partículas contaminantes detectadas en esa ubicación. La API permite integrar fácilmente la funcionalidad de mapas en la web, y es esencial para visualizar la información procesada por el bot de Telegram.
+
+
+ 
+ En resumen, este proyecto combina las API de Telegram y Google Maps para crear una atmósfera completa que permite a los usuarios enviar su ubicación y fotos, procesar las imágenes para contar los puntos de contaminación detectados y mostrar la información en un mapa.
+

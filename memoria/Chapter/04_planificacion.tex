@@ -1,0 +1,26 @@
+\chapter{Planificación}\label{int}
+\thispagestyle{fancy}
+
+
+\section{Investigación}
+Para el desarrollo de este proyecto se deben llevar a cabo una serie de investigaciones en las tecnologías que se van a usar, específicamente Django, Python y Telegram.
+Partimos de la base que ya se tenían ciertos conocimientos previos en torno a Django y Python gracias a la formación recibida en la carrera.
+Para poder desarrollar de manera satisfactoria el proyecto podemos identificar varias subtareas.
+\begin{itemize}
+    \item Uso de la API de Telegram
+    \item Uso de la API de Google Maps
+    \item Uso de Django y Python
+    \item Tratamiento de imágenes
+\end{itemize}
+\section{Creación del bot}
+La creación del bot incluye la interacción con el bot maestro de Telegram y obtener el token de autorización.
+El proceso de definición implica el desarrollo del código para poder recibir la ubicación y las imágenes y la lógica de comportamiento ante ellos.
+\section{Tratamiento de la imagen y obtención de resultados}
+Para llevar a cabo esta tarea se deben entender los detalles detrás del script que se utiliza para tratar la imagen. Este script realiza tareas como cargar la imagen, aplicar un filtro de diferencia de mediana, convertir a escala de grises, aplicar la diferencia entre la imagen original y la imagen suavizada con el filtro de mediana, y finalmente, guardar la imagen con las manchas resaltadas.
+
+Después de realizar esta primera tarea, el siguiente paso es contar los puntos o manchas en la imagen resaltada. Esto se hace aplicando threshold binario para eliminar el ruido, encontrar los contornos y dibujarlos en la imagen original en rojo, y guardar la imagen con los puntos detectados marcados en rojo. Finalmente, se imprime el número de puntos encontrados.
+
+
+
+\section{Enviar datos a la web }
+Para enviar la información correctamente a la web y poder almacenarla en la web primero se verifica que la imagen sea válida, luego se hace uso del los scripts necesarios para procesar la imagen y contar los puntos. Una vez esto ha sido hecho se crea un diccionario con la información de la imagen  que contendrá los datos que nos interesan para mandar a nuestra web, por último se manda una petición POST a la dirección "http://127.0.0.1:8000/api/data/" con el diccionario en formato JSON.

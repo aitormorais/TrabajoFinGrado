@@ -1,0 +1,28 @@
+\chapter{Objetivos y alcance}\label{Int}
+\fancyhf{}% Clear header/footer
+\fancyhead[L]{PROYECTO DE FIN DE GRADO}
+\fancyfoot[L]{\thepage} 
+\thispagestyle{fancy}
+\section{Objetivos}
+El objetivo de este trabajo es el de Diseño y Desarrollo de una App móvil
+multiplataforma que detecte contaminación atmosférica mediante fotografías, para esto haremos uso de un bot de Telegram y una web que nos mostrara el contenido de manera amigable.
+\begin{itemize}
+    \item El sistema ha de ser desacoplado para que este pueda ser fácilmente mantenible y escalable
+    \item El sistema será fluido y con tiempos de respuesta aceptables
+\end{itemize}
+Se alcanzara el objetivo mediante una elección coherente de arquitectura, software y una buena programación del sistema
+\section{Alcance}
+Se trata del diseño y desarrollo de una app móvil multiplataforma capaz de detectar la contaminación atmosférica mediante fotografías.
+Para poder lograr esto haremos uso de un bot de Telegram en el que el usuario subirá la imagen en la que se han quedado las partículas y también mandara la ubicación en donde la imagen fue tomada.
+Una vez el bot tenga la imagen y la ubicación la imagen será procesada para contar las partículas en ella, con esta información se mandara una petición HTTP  de tipo post a la base de datos de la web y alojara la información para posteriormente mostrarla en el mapa.
+A continuación, se define brevemente el alcance de cada una de las partes implicadas en el sistema.
+En conclusión, el sistema ha de reflejar la estructura mencionada con base en un desarrollo software coherente. Queda fuera del alcance del sistema la aplicación de técnicas de inteligencia artificial para procesar las imágenes, así como para reconocer el tipo de imagen, o forzar al usuario a meter una imagen especifica, es decir, se dará por hecho que el usuario siempre meterá una imagen correcta. También quedan fuera  temas relacionados con ciberseguridad a la hora de mandar la información a la base de datos, esta parte ha quedado fuera, ya que el proyecto se desarrolla en la una máquina local  y solo yo tengo acceso a esta información. Siendo mejoras que se podrían llevar a cabo en futuras ampliaciones del proyecto o en un despliegue final.
+A continuación, se define brevemente el alcance de cada una de las partes implicadas en el
+sistema.
+
+\subsection{Bot de Telegram}
+El bot se encarga de recibir la información relevante, a la ubicación y la imagen. Esta parte implica la creación del bot y el uso de las API oficiales de Telegram y el desarrollo del código referente a la puesta en marcha del bot.
+\subsection{Web}
+La página web nos sirve para visualizar de una manera amigable la información que ha sido cargada previamente por otros usuarios y está alojada en una base de datos propia de Django.
+\subsection{Procesamiento de la imagen:}
+Se usa una función llamada suavizar incluida en el bot de Telegram para procesar la imagen subida por el usuario, esta función tiene como objetivo procesar una imagen específica para suavizarla y resaltar las manchas presentes en ella.
