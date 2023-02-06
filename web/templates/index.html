@@ -1,5 +1,33 @@
 {% extends 'base.html' %}
-{%block title%}Django{%endblock%}
-{%block container%}
-    <h1>datos..</h1>
-{%endblock%}
+{% block title %}Portada {% endblock %}
+{% block headers %}
+    <h1>Aitor Morais</h1>
+{% endblock %}
+{% block content %}
+<div class ="container">
+    <div id="carouselContent" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active text-center p-4">
+                <h2> ¿Quien soy?</h2>
+                <p style="font-size: 18px;">Mi nombre es Aitor y soy un estudiante de Ingenieria Informatica en la universidad de Deusto</p>
+            </div>
+            <div class="carousel-item text-center p-4">
+                <h2>Lugares Favoritos</h2>
+                        <p style="font-size: 18px;">Uno de mis lugares favortios es el puerto viejo de Algorta, me parece un sitio muy bonito por el cual pasear y poder tomar algo con los amigos por sus diversos bares
+                        </p>
+                        <img src="https://www.getxo.eus/ImagesPublic/turismo/Slider/cabecera-que-ver.jpeg" style="width:40%"/>
+           </div>
+              <a class="carousel-control-prev" href="#carouselContent" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" style="background-color:red;" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselContent" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" style="background-color:red;" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
