@@ -47,4 +47,7 @@ def guardar_peticion(request):
 def home(request):
     ubicaciones = Ubicacion.objects.all()
     form = UbicacionForm()
-    return render (request,"index.html",{'ubicaciones':ubicaciones})
+    listaUbicaciones = []
+    for ubi in ubicaciones:
+        listaUbicaciones.append([ubi.nombre,ubi.lat,ubi.lng,ubi.contaminacion,str(ubi.fecha)])
+    return render (request,"index.html",{'ubicaciones':listaUbicaciones})

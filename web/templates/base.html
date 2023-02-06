@@ -7,42 +7,11 @@
 </head>
 <body>
   <div id="map" style="width: 500px; height: 400px;"></div>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk-jcafbBJsvLF2MnZS9m0wOgQCDi4mCs"></script>
+  <script src = "{%static 'js/maps.js' %}"></script>
   <script type="text/javascript">
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
-      center: new google.maps.LatLng(43.263002, -2.935004),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
-    
-    var infowindow = new google.maps.InfoWindow();
-
-    var marker, i;
-      {%for u in ubicaciones%}
-        var lat = {{u.lat}};
-        var lng = {{u.lng}};
-        
-        // Crear el marcador
-        var marker = new google.maps.Marker({
-          position: new google.maps.LatLng(lat, lng),
-          map: map,
-          title: "NOMBRE"
-        });
-        // Procesar varias ventanas de información
-        (function(marker) {
-          // Añadir evento de clic
-          google.maps.event.addListener(marker, 'click', function() {
-            infowindow = new google.maps.InfoWindow({
-              content: 'Nombre:"{{u.nombre}}",Particulas:{{u.contaminacion}}'
-            });
-            infowindow.open(map, marker);
-          });
-        })(marker);
-
-      {%endfor%}
-  </script>
-  
+  crearMapa({{ubicaciones|safe}})
+</script>
 </body>
 </html>
