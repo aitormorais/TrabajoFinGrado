@@ -1,16 +1,12 @@
-
 var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 10,
     center: new google.maps.LatLng(43.263002, -2.935004),
     mapTypeId: google.maps.MapTypeId.ROADMAP
 });
-      
-        
 function crearMapa(ubicaciones){
     var infowindow = new google.maps.InfoWindow();
     var marker, i;
     ubicaciones.forEach(generarMarkers);
-
 }
 function generarMarkers(mk){
     var lat = mk[1];
@@ -42,7 +38,6 @@ function generarMarkers(mk){
             strokeWeight: 1
         }
       });
-
       (function(marker) {
         // Añadir evento de clic
         google.maps.event.addListener(marker, 'click', function() {
@@ -52,6 +47,4 @@ function generarMarkers(mk){
           infowindow.open(map, marker);
         });
       })(marker);
-
-
 }

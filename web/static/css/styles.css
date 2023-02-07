@@ -9,8 +9,8 @@
     text-align: center;
     
 }
-body{
-    background: #E6E6E6; 
+.body{
+    background: #E8E6E6; 
 }
 .capas{
     width: 440px;
@@ -24,4 +24,12 @@ body{
     border-bottom: 1px solid #000;
     height: 250px;
     text-align: left;
+}
+.color-bar {
+    display: flex;
+    width: 100%;
+}
+.color-bar > div {
+    width: 25%;
+    height: 20px;
 }
