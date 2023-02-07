@@ -117,7 +117,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATITICFILES_DIRS = [
-    os.path.join(BASE_DIR,'mapas/static'),
+    os.path.join(BASE_DIR,'web/static'),
 ]
 STATIC_URL = '/static/'
 

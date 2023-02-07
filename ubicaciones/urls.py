@@ -10,6 +10,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/data/', views.receive_json, name='receive_json'),
     # Api routes
-    path('',views.home, name= "index"),
+    path('',views.home, name= "base"),
     path('guardar_peticion/', views.guardar_peticion, name='guardar_peticion'),
 ]

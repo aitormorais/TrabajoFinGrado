@@ -1,15 +1,109 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang ="es">
+<html lang="es">
 <head>
-  <title>{%block title%}{%endblock%}</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      }
+    .labels {
+      display: flex;
+      height: 100%;
+    }
+
+    .label {
+      flex: 1;
+      padding: 20px;
+      background-color: lightgray;
+      text-align: center;
+    }
+
+    #map {
+        width: 100%;
+        height: 600px;
+    }
+    
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    header a {
+        color: #fff;
+        text-decoration: none;
+    }
+  </style>
 </head>
+
+
 <body>
-  <div id="map" style="width: 500px; height: 400px;"></div>
+  <header>
+    <h1>Mapa de ubicaciones</h1>
+  </header>
+  
+  <div id="map"></div>
+  <div class="labels">
+    <div class="label">
+      <h2>Rangos de contaminación</h2>
+      <ul>
+        <li style="color: green;">Menor a 11: marcador verde</li>
+        <li style="color: yellow;">Entre 11 y 25: marcador amarillo</li>
+        <li style="color: orange;">Entre 26 y 50: marcador naranja</li>
+        <li style="color: red;">Más de 50: marcador rojo</li>
+      </ul>
+    </div>
+    <div class="label">
+      <h2>Puntos menos contaminados</h2>
+      <ul>
+        {% for ubicacion in tres_menos_contaminadas %}
+          {% if ubicacion.3 <= 10 %}
+            <li style="color: green;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          {% elif ubicacion.3 > 10 and ubicacion.3 <= 25 %}
+            <li style="color: yellow;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          {% elif ubicacion.3 > 25 and ubicacion.3 <= 50 %}
+            <li style="color: orange;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          {% else %}
+            <li style="color: red;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          {% endif %}
+        {% endfor %}
+
+      </ul>
+    </div>
+    
+    
+    
+    <div class="label">
+      <h2>Puntos más contaminados</h2>
+      <ul>
+        {% for ubicacion in tres_mas_contaminadas %}
+          {% if ubicacion.3 <= 10 %}
+            <li style="color: green;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          {% elif ubicacion.3 > 10 and ubicacion.3 <= 25 %}
+            <li style="color: yellow;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          {% elif ubicacion.3 > 25 and ubicacion.3 <= 50 %}
+            <li style="color: orange;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          {% else %}
+            <li style="color: red;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          {% endif %}
+        {% endfor %}
+
+      </ul>
+    </div>
+  </div>
+  
+  </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk-jcafbBJsvLF2MnZS9m0wOgQCDi4mCs"></script>
-  <script src = "{%static 'js/maps.js' %}"></script>
-  <script type="text/javascript">crearMapa({{ubicaciones|safe}})</script>
+  <script src="{% static 'js/maps.js' %}"></script>
+  <script type="text/javascript">
+    crearMapa({{ ubicaciones|safe }});
+  </script>
 </body>
 </html>

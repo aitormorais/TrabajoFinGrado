@@ -49,5 +49,15 @@ def home(request):
     form = UbicacionForm()
     listaUbicaciones = []
     for ubi in ubicaciones:
-        listaUbicaciones.append([ubi.nombre,ubi.lat,ubi.lng,ubi.contaminacion,str(ubi.fecha)])
-    return render (request,"index.html",{'ubicaciones':listaUbicaciones})
+        try:
+            value = float(ubi.contaminacion)
+        except ValueError:
+            value = 0
+        listaUbicaciones.append([ubi.nombre, ubi.lat, ubi.lng, value, str(ubi.fecha)])
+    listaUbicaciones = sorted(listaUbicaciones, key=lambda x: x[3])
+    tres_menos_contaminadas = listaUbicaciones[:3]
+    tres_mas_contaminadas = listaUbicaciones[-3:]
+    for ubica in tres_mas_contaminadas:
+        print(type(ubica[3]))
+    return render(request, "base.html", {'ubicaciones': listaUbicaciones, 'tres_menos_contaminadas': tres_menos_contaminadas, 'tres_mas_contaminadas': tres_mas_contaminadas})
+

@@ -26,4 +26,4 @@ def tratar(nombre_imagen):
     # Guardar la imagen con los puntos detectados marcados en rojo 
     cv2.imwrite("img_puntos.jpg", img_puntos) 
     # Imprimir el número de puntos encontrados  
-    return len(contornos)/36 
+    return round(len(contornos)/36,2)
