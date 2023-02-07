@@ -7,7 +7,7 @@ def tratar(nombre_imagen):
     if img is None:
         raise ValueError("No se pudo cargar la imagen: ", nombre_imagen)
     # Aplicar filtro de diferencia de mediana 
-    img_suave = cv2.medianBlur(img, 5) 
+    img_suave = cv2.medianBlur(img, 7) 
     # Convertir a escala de grises 
     img_gris = cv2.cvtColor(img_suave, cv2.COLOR_BGR2GRAY) 
     # Aplicar la diferencia entre la imagen original y la imagen suavizada con el filtro de mediana 
