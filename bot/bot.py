@@ -15,10 +15,8 @@ import tratar_imagen as t_img
 import logging
 latitud,longitud=0,0
 logging.basicConfig(level=logging.ERROR, filename='errors.log', filemode='w', format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
-logging.basicConfig(level=logging.DEBUG, filename='debug.log', filemode='w', format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 async def process_image(update, context):
     try:
-        logging.debug("Procesando imagen")
         contamina = t_img.tratar("a.jpg")
         peticion = "https://maps.googleapis.com/maps/api/geocode/json?latlng={},{}&key=AIzaSyAk-jcafbBJsvLF2MnZS9m0wOgQCDi4mCs".format(latitud,longitud)
         response = requests.get(peticion)
@@ -67,17 +65,22 @@ async def message_handler(update: Update, context):
             latitud = location.latitude
             global longitud 
             longitud = location.longitude
+            await update.message.reply_text("Gracias, hemos tenemos su ubicacion, mande la imagen.")
         if update.message.photo:
-            file_id = update.message.photo[-1].file_id
-            foto = await context.bot.get_file(file_id)
-            response = requests.get(foto.file_path)
-            with open('a.jpg', 'wb') as f:
-                f.write(response.content)
-            await update.message.reply_text("Imagen recibida, Procesando...")
-            await process_image(Update, context)
-            await update.message.reply_text("Gracias, hemos procesado su imagen.")   
-        else:
-            await update.message.reply_text("No se a subido imagen")
+            if latitud == 0 and longitud == 0:
+                await update.message.reply_text("Por favor, envía tus coordenadas antes de enviar la imagen.")
+                return
+            else:
+                file_id = update.message.photo[-1].file_id
+                foto = await context.bot.get_file(file_id)
+                response = requests.get(foto.file_path)
+                with open('a.jpg', 'wb') as f:
+                    f.write(response.content)
+                await update.message.reply_text("Imagen recibida, Procesando...")
+                await process_image(Update, context)
+                latitud = 0
+                longitud = 0
+                await update.message.reply_text("Gracias, hemos procesado su imagen.")
     except Exception as e:
         logging.error(f"Ha ocurrido un error en message_handler: {e}")
         await update.message.reply_text("Lo siento, ha ocurrido un error inesperado. Por favor, inténtalo de nuevo más tarde...")

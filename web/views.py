@@ -46,18 +46,10 @@ def guardar_peticion(request):
 
 def home(request):
     ubicaciones = Ubicacion.objects.all()
-    form = UbicacionForm()
     listaUbicaciones = []
     for ubi in ubicaciones:
-        try:
-            value = float(ubi.contaminacion)
-        except ValueError:
-            value = 0
-        listaUbicaciones.append([ubi.nombre, ubi.lat, ubi.lng, value, str(ubi.fecha)])
-    listaUbicaciones = sorted(listaUbicaciones, key=lambda x: x[3])
-    tres_menos_contaminadas = listaUbicaciones[:3]
-    tres_mas_contaminadas = listaUbicaciones[-3:]
-    for ubica in tres_mas_contaminadas:
-        print(type(ubica[3]))
+        listaUbicaciones.append([ubi.nombre, ubi.lat, ubi.lng, ubi.contaminacion, str(ubi.fecha)])
+    tres_menos_contaminadas = ubicaciones.order_by('contaminacion')[:3]
+    tres_mas_contaminadas = ubicaciones.order_by('-contaminacion')[:3]
     return render(request, "base.html", {'ubicaciones': listaUbicaciones, 'tres_menos_contaminadas': tres_menos_contaminadas, 'tres_mas_contaminadas': tres_mas_contaminadas})
 

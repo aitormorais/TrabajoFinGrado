@@ -28,7 +28,7 @@ function generarMarkers(mk){
     var marker = new google.maps.Marker({
         position: new google.maps.LatLng(lat,lng),
         map: map,
-        title: "nombre",
+        title: mk[0],
         icon: {
             path: google.maps.SymbolPath.CIRCLE,
             scale: 10,

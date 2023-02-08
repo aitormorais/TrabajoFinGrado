@@ -5,41 +5,6 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      }
-    .labels {
-      display: flex;
-      height: 100%;
-    }
-
-    .label {
-      flex: 1;
-      padding: 20px;
-      background-color: lightgray;
-      text-align: center;
-    }
-
-    #map {
-        width: 100%;
-        height: 600px;
-    }
-    
-    header {
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-    }
-    
-    header a {
-        color: #fff;
-        text-decoration: none;
-    }
-  </style>
 </head>
 
 
@@ -63,17 +28,16 @@
       <h2>Puntos menos contaminados</h2>
       <ul>
         {% for ubicacion in tres_menos_contaminadas %}
-          {% if ubicacion.3 <= 10 %}
-            <li style="color: green;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
-          {% elif ubicacion.3 > 10 and ubicacion.3 <= 25 %}
-            <li style="color: yellow;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
-          {% elif ubicacion.3 > 25 and ubicacion.3 <= 50 %}
-            <li style="color: orange;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          {% if ubicacion.contaminacion <= 10 %}
+            <li style="color: green;">{{ ubicacion.nombre }} - {{ ubicacion.contaminacion }}</li>
+          {% elif ubicacion.contaminacion > 10 and ubicacion.contaminacion <= 25 %}
+            <li style="color: yellow;">{{ ubicacion.nombre }} - {{ ubicacion.contaminacion }}</li>
+          {% elif ubicacion.contaminacion > 25 and ubicacion.contaminacion <= 50 %}
+            <li style="color: orange;">{{ ubicacion.nombre }} - {{ ubicacion.contaminacion }}</li>
           {% else %}
-            <li style="color: red;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+            <li style="color: red;">{{ ubicacion.nombre }} - {{ ubicacion.contaminacion }}</li>
           {% endif %}
         {% endfor %}
-
       </ul>
     </div>
     
@@ -83,14 +47,14 @@
       <h2>Puntos más contaminados</h2>
       <ul>
         {% for ubicacion in tres_mas_contaminadas %}
-          {% if ubicacion.3 <= 10 %}
-            <li style="color: green;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
-          {% elif ubicacion.3 > 10 and ubicacion.3 <= 25 %}
-            <li style="color: yellow;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
-          {% elif ubicacion.3 > 25 and ubicacion.3 <= 50 %}
-            <li style="color: orange;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          {% if ubicacion.contaminacion <= 10 %}
+          <li style="color: green;">{{ ubicacion.nombre }} - {{ ubicacion.contaminacion }}</li>
+          {% elif ubicacion.contaminacion > 10 and ubicacion.contaminacion <= 25 %}
+          <li style="color: yellow;">{{ ubicacion.nombre }} - {{ ubicacion.contaminacion }}</li>
+          {% elif ubicacion.contaminacion > 25 and ubicacion.contaminacion <= 50 %}
+          <li style="color: orange;">{{ ubicacion.nombre }} - {{ ubicacion.contaminacion }}</li>
           {% else %}
-            <li style="color: red;">{{ ubicacion.0 }} - {{ ubicacion.3|default:0 }}</li>
+          <li style="color: red;">{{ ubicacion.nombre }} - {{ ubicacion.contaminacion }}</li>
           {% endif %}
         {% endfor %}
 

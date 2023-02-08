@@ -2,10 +2,10 @@ from django.db import models
 from django.forms import ModelForm
 
 class Ubicacion(models.Model):
-    nombre = models.CharField(max_length=20)
+    nombre = models.CharField(max_length=200)
     lat = models.CharField(max_length=200)
     lng = models.CharField(max_length=200)
-    contaminacion = models.CharField(max_length=200)
+    contaminacion = models.FloatField()
     fecha = models.DateTimeField(auto_now_add=True)
     def __unicode__(self):
         return self.nombre
@@ -14,4 +14,4 @@ class Ubicacion(models.Model):
 class UbicacionForm(ModelForm):
     class Meta:
         model = Ubicacion
-        fields = ['lat', 'lng','nombre']
+        fields = ['lat', 'lng','nombre','contaminacion']
