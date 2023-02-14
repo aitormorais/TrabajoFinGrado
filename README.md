@@ -1,9 +1,5 @@
 # TrabajoFinGrado
 
-
-
-*Read this in other languages: [English](README.md), [Spanish](README.es.md).*
-
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
@@ -30,9 +26,6 @@ This project is about a Telegram bot capable of detecting the atmospheric pollut
 
 <!-- CONTRIBUTORS -->
 ## Contributors
-
-Thanks to the [support staff](#acknowledgements) that helped with the theoretical content and with Qiskit language:
-
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
 <table align="center">
@@ -92,8 +85,9 @@ You can activate the Telegram bot by going into the directory called "bot" and e
 ```sh
 python bot.py 
 ```
-
-Note: _For more information, please refer to the [Django documentation](https://www.djangoproject.com/start/)._
+once the bot is active, you should search in telegram for the following name : **@TFGImagen_bot**
+if the website is active and the bot is active you can start using it.
+Note: _For more information, please refer to the [Django documentation](https://www.djangoproject.com/start/),
 [Telegram documentation](https://core.telegram.org/bots/api).
 
 
